@@ -1,0 +1,12 @@
+Index: qca-nss-gmac-2021-04-20-17176794/ipq806x/nss_gmac_ctrl.c
+===================================================================
+--- qca-nss-gmac-2021-04-20-17176794.orig/ipq806x/nss_gmac_ctrl.c
++++ qca-nss-gmac-2021-04-20-17176794/ipq806x/nss_gmac_ctrl.c
+@@ -1241,6 +1241,7 @@ static int32_t nss_gmac_probe(struct pla
+ 
+ 	netdev->base_addr = pdev->resource[0].start;
+ 	netdev->irq = pdev->resource[1].start;
++	netdev->max_mtu = NSS_GMAC_JUMBO_MTU;
+ 	gmacdev->macid = pdev->id;
+ 	gmacdev->sgmii_pcs_chanid = gmacdev->macid;
+ #endif
