@@ -1,6 +1,20 @@
 --- a/mc_osdep.h
 +++ b/mc_osdep.h
-@@ -189,7 +189,7 @@ static inline struct net_bridge_port *mc
+@@ -21,7 +21,12 @@
+ #include <linux/netfilter_bridge.h>
+ #include <br_private.h>
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 0, 0))
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 162))
++static inline int os_br_pass_frame_up(struct sk_buff *skb)
++{
++	return br_pass_frame_up(skb, false);
++}
++#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 0, 0))
+ static inline int os_br_pass_frame_up(struct sk_buff *skb)
+ {
+ 	return br_pass_frame_up(skb);
+@@ -189,7 +194,7 @@ static inline struct net_bridge_port *mc
  
  	dst = os_br_fdb_get((struct net_bridge *)br, eth_hdr(*skb)->h_dest);
  
